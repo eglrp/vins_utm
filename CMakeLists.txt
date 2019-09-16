@@ -108,3 +108,6 @@ target_link_libraries(testOpenMP MyVio utmHTTP)
 
 add_executable(testHTTP test/testHttp.cpp)
 target_link_libraries(testHTTP MyVio utmHTTP)
+
+add_executable(testHTTPLoop test/testHttpLoop.cpp)
+target_link_libraries(testHTTPLoop MyVio utmHTTP)

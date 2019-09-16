@@ -39,9 +39,9 @@ int main(int argc, char** argv){
     char http_msg[4096] = {0};
 //    strcpy(http_msg, "http://www.analysis-api.tm-uas.com/UtmApi/api/flights/telemetry/append/");
 //    strcpy(http_msg, "http://www.wikipedia.org");
+//    http://www.analysis-api.tm-uas.com/utmapi/api/pilotui/GetPilotFlights
     strcpy(http_msg, argv[2]);
 
-//    http://www.analysis-api.tm-uas.com/utmapi/api/pilotui/GetPilotFlights
     if (isGet) {
         if(Http->HttpGet(http_msg, http_return)){
             cout << ">>>>>>>>>>>>>>>HTTP_return>>>>>>>>>>>>>>>\n" << http_return << endl;

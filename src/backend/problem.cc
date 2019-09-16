@@ -247,9 +247,9 @@ bool Problem::Solve(int iterations) {
     }
     std::cout << "problem solve cost: " << t_solve.toc() << " ms" << std::endl;
     std::cout << "   makeHessian cost: " << t_hessian_cost_ << " ms" << std::endl;
-    ofstream fout("Hessian_cost.txt", ios::app);
-    fout << "   makeHessian cost: " << t_hessian_cost_ << " ms\n";
-    fout.close();
+//    ofstream fout("Hessian_cost.txt", ios::app);
+//    fout << "   makeHessian cost: " << t_hessian_cost_ << " ms\n";
+//    fout.close();
     t_hessian_cost_ = 0.;
     return true;
 }
@@ -297,9 +297,9 @@ bool Problem::SolveDogleg(int iterations) {
     }
     std::cout << "problem solve cost: " << t_solve.toc() << " ms" << std::endl;
     std::cout << "   makeHessian cost: " << t_hessian_cost_ << " ms" << std::endl;
-    ofstream fout("Hessian_cost.txt", ios::app);
-    fout << "   makeHessian cost: " << t_hessian_cost_ << " ms\n";
-    fout.close();
+//    ofstream fout("Hessian_cost.txt", ios::app);
+//    fout << "   makeHessian cost: " << t_hessian_cost_ << " ms\n";
+//    fout.close();
     t_hessian_cost_ = 0.;
     return true;
 }

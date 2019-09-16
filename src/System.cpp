@@ -5,6 +5,7 @@
 using namespace std;
 using namespace cv;
 using namespace pangolin;
+
 System::System(string sConfig_file_)
     :bStart_backend(true)
 {
@@ -16,7 +17,12 @@ System::System(string sConfig_file_)
     trackerData[0].readIntrinsicParameter(sConfig_file);
 
     estimator.setParameter();
-    ofs_pose.open("./pose_output.txt",fstream::app | fstream::out);
+    time_t t = time(0);   // get time now
+    struct tm * now = localtime( & t );
+    char buffer [80];
+    strftime (buffer,80,"./pose_output-%y%m%d-%H%M%S.txt",now);
+    poseOutputName = buffer;
+    ofs_pose.open(poseOutputName,fstream::app | fstream::out);
     if(!ofs_pose.is_open())
     {
         cerr << "ofs_pose is not open" << endl;
@@ -247,6 +253,10 @@ void System::PubImuData(double dStampSec, const Eigen::Vector3d &vGyr,
 void System::ProcessBackEnd()
 {
     cout << "1 ProcessBackEnd start" << endl;
+
+    std::stringstream dataBuff;
+    dataBuff.str("");
+    double lastPostTimestamp = 0.0;
     while (bStart_backend)
     {
         // cout << "1 process()" << endl;
@@ -344,9 +354,17 @@ void System::ProcessBackEnd()
                 double dStamp = estimator.Headers[WINDOW_SIZE];
                 cout << "1 BackEnd processImage dt: " << fixed << t_processImage.toc() << " stamp: " <<  dStamp << " p_wi: " << p_wi.transpose() << endl;
                 ofs_pose << fixed << dStamp << " " << p_wi.transpose() << " " << q_wi.coeffs().transpose() << endl;
-                char tempChar[4096] = {0}, tempResponse[4096] = {0};
-                sprintf(tempChar, "%f", dStamp);
-                http->HttpPost(utm_url, tempChar, tempResponse);
+                dataBuff << fixed << "(" << dStamp << " " << p_wi.transpose() << " " << q_wi.coeffs().transpose() << ")" << endl;
+                if ((dStamp - lastPostTimestamp) >= 1.5 ){
+                    char data[4096] = {0}, tempResponse[4096] = {0};
+//                    sprintf(tempChar, "%f", dStamp);
+                    strcpy(data, dataBuff.str().c_str());
+                    http->HttpPost(utm_url, data, tempResponse);
+                    dataBuff.str("");
+                    lastPostTimestamp = dStamp;
+                }
+
+
             }
         }
         m_estimator.unlock();

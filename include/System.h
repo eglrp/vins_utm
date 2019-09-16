@@ -10,14 +10,13 @@
 #include <condition_variable>
 
 #include "HttpReq.h"
-
+#include <sstream>
 // #include <cv.h>
 // #include <opencv2/opencv.hpp>
 
 #include "estimator.h"
 #include "parameters.h"
 #include "feature_tracker.h"
-
 
     //imu for vio
     struct IMU_MSG
@@ -100,11 +99,14 @@ private:
     bool init_imu = 1;
     double last_imu_t = 0;
     std::ofstream ofs_pose;
+//    std::stringstream dataBuff;
     std::vector<Eigen::Vector3d> vPath_to_draw;
     bool bStart_backend;
     std::vector<std::pair<std::vector<ImuConstPtr>, ImgConstPtr>> getMeasurements();
 
     HttpRequest* http;
+
+    string poseOutputName;
 
     
 };
