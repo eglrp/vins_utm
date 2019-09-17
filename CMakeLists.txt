@@ -136,3 +136,6 @@ target_link_libraries(testHTTP MyVio utmHTTP)
 
 add_executable(testHTTPLoop test/testHttpLoop.cpp)
 target_link_libraries(testHTTPLoop MyVio utmHTTP)
+
+add_executable(vinsUTM_node test/vinsUTM_node.cpp)
+target_link_libraries(vinsUTM_node MyVio utmHTTP)
