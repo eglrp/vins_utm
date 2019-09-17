@@ -148,8 +148,8 @@ char* HttpRequest::HttpHeadCreate(const char* strMethod, const char* strUrl, con
     char* strHost = GetHostAddrFromUrl(strUrl);
     char* strParam = GetParamFromUrl(strUrl);
 
-    char* strHttpHead = (char*)malloc(BUFSIZE);
-    memset(strHttpHead, 0, BUFSIZE);
+    char* strHttpHead = (char*)malloc(HTTP_BUFSIZE);
+    memset(strHttpHead, 0, HTTP_BUFSIZE);
 
     strcat(strHttpHead, strMethod);
     strcat(strHttpHead, " /");
@@ -188,9 +188,9 @@ char* HttpRequest::HttpHeadCreate(const char* strMethod, const char* strUrl, con
 //发送HTTP请求并接受响应
 char* HttpRequest::HttpDataTransmit(char *strHttpHead, const int iSockFd)
 {
-    char* buf = (char*)malloc(BUFSIZE);
-    char* result=(char*)malloc(BUFSIZE);
-    memset(buf, 0, BUFSIZE);
+    char* buf = (char*)malloc(HTTP_BUFSIZE);
+    char* result=(char*)malloc(HTTP_BUFSIZE);
+    memset(buf, 0, HTTP_BUFSIZE);
     int ret = send(iSockFd,(void *)strHttpHead,strlen(strHttpHead)+1,0);
     free(strHttpHead);
     if (ret < 0) {
@@ -201,7 +201,7 @@ char* HttpRequest::HttpDataTransmit(char *strHttpHead, const int iSockFd)
 
     while(1)
     {
-        ret = recv(iSockFd, (void *)buf, BUFSIZE,0);
+        ret = recv(iSockFd, (void *)buf, HTTP_BUFSIZE,0);
         if (ret == 0) //连接关闭
         {
             close(iSockFd);

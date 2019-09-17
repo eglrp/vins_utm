@@ -2,6 +2,7 @@
 #include <iostream>
 //#include <string.h>
 #include <sstream>
+#include <ros/ros.h>
 
 #define MAX_BUFF_LENGTH 10
 
@@ -21,12 +22,13 @@ int main(int argc, char** argv){
         if ((i-lastPostStamp) >= MAX_BUFF_LENGTH){
             // TODO post
             strcpy(data, msgBuff.str().c_str());
-            char* response = (char*) malloc(BUFSIZE);
+            char* response = (char*) malloc(HTTP_BUFSIZE);
             if (Http->HttpPost(http_msg, data, response)) {
                 cout << ">>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>\n" << response
                      << "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
             }else {
                 cout << "No response.\r\n";
+                ROS_INFO("No response.\r\n");
             }
             msgBuff.str(""); // clear buffer
             lastPostStamp = i; // reset counter

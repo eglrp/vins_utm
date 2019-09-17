@@ -6,6 +6,7 @@ using namespace std;
 using namespace cv;
 using namespace pangolin;
 
+
 System::System(string sConfig_file_)
     :bStart_backend(true)
 {
@@ -20,7 +21,7 @@ System::System(string sConfig_file_)
     time_t t = time(0);   // get time now
     struct tm * now = localtime( & t );
     char buffer [80];
-    strftime (buffer,80,"./src/vins_utm/output/pose_output-%y%m%d-%H%M%S.txt",now);
+    strftime (buffer,80,"../catkin_ws/src/vins_utm/output/pose_output-%y%m%d-%H%M%S.txt",now);
     poseOutputName = buffer;
     ofs_pose.open(poseOutputName,fstream::app | fstream::out);
     if(!ofs_pose.is_open())

@@ -1,0 +1,6 @@
+<launch>
+
+    <node name="run_euroc" pkg="vins_utm" type="run_euroc" args="$(env HOME)/DataSet/EuRoC/MH_05_difficult/mav0/ $(find vins_utm)/config/" />
+
+
+</launch>

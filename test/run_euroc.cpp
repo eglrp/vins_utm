@@ -92,10 +92,10 @@ void PubImageData()
 
 int main(int argc, char **argv)
 {
-	if(argc != 3)
+	if(argc < 3) // in roslaunch, there will be two extra args. They are __name and __log
 	{
-		cerr << "./run_euroc PATH_TO_FOLDER/MH-05/mav0 PATH_TO_CONFIG/config \n" 
-			<< "For example: ./run_euroc /home/stevencui/dataset/EuRoC/MH-05/mav0/ ../config/"<< endl;
+		cerr << "Not enough arguments!\nUsage: ./run_euroc PATH_TO_FOLDER/MH-05/mav0 PATH_TO_CONFIG/config \n"
+			<< "For example: ./run_euroc ~/DataSet/EuRoC/MH_05_difficult/mav0/ ~/catkin_ws/src/vins_utm/config/"<< endl;
 		return -1;
 	}
 	sData_path = argv[1];

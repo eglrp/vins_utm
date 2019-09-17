@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
-#define BUFSIZE 41000
+#define HTTP_BUFSIZE 41000
 #define URLSIZE 1024
 #define INVALID_SOCKET -1
 //#define __DEBUG__

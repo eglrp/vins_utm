@@ -75,7 +75,7 @@ int main(int argc, char** argv){
         }
         cout << "<<<<<<<<<<Message<<<<<<<<<<\n" << data << "\n<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
 
-        char* response = (char*) malloc(BUFSIZE);
+        char* response = (char*) malloc(HTTP_BUFSIZE);
         if (Http->HttpPost(http_msg, data, response)) {
             cout << ">>>>>>>>>>>>>>>response>>>>>>>>>>>>>>>\n" << response
                  << "\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n";
