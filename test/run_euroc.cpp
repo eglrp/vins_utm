@@ -12,6 +12,7 @@
 #include <highgui.h>
 #include <eigen3/Eigen/Dense>
 #include "System.h"
+#include <ros/ros.h>
 
 using namespace std;
 using namespace cv;
