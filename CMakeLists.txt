@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(vins_utm)
 add_definitions(-std=c++11 -g -O3)
 
+
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_FLAGS "-std=c++11 -fopenmp")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -g")
